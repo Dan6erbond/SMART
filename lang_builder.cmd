@@ -1,0 +1,1 @@
+pyinstaller --onefile lang_builder.py
