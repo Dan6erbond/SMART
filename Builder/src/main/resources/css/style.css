@@ -1,4 +1,8 @@
-.window {
+* {
+    -accent-color: #1eb87f;
+}
+
+.root {
     -fx-background-color: #263238;
     -fx-font-family: Roboto;
 }
@@ -16,6 +20,12 @@
 .button:hover {
     /*-fx-background-color: #e7e7e7;*/
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0);
+}
+
+.bigButton {
+    -fx-background-color: -accent-color;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
 }
 
 .filePicker {
