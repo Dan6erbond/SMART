@@ -3,14 +3,18 @@
     -fx-border-color: black;
     -fx-border-radius: 3px;
     -fx-border-width: 1px;
-    -fx-padding: 0px;
+    /*-fx-padding: 0px;*/
     /*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
 
 .button:hover {
-    -fx-background-color: #bbbbbb;
+    -fx-background-color: #e7e7e7;
 }
 
 .anchor-pane {
     -fx-background-color: white;
+}
+
+.title {
+    -fx-font-size: 20px;
 }
