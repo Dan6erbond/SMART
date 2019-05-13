@@ -18,15 +18,16 @@ public class HomeController implements Initializable {
 
     public void openLangBuilder(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LangBuilder.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        openScene(stage, "/fxml/LangBuilder.fxml");
     }
 
     public void openModBuilder(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModBuilder.fxml"));
+        openScene(stage, "/fxml/ModBuilder.fxml");
+    }
+
+    private void openScene(Stage stage, String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
