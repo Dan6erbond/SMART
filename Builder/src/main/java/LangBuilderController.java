@@ -1,14 +1,15 @@
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class LangBuilderController implements Initializable {
@@ -18,6 +19,7 @@ public class LangBuilderController implements Initializable {
     public TextField name;
     public TextArea description;
     public Button writeFileBtn;
+    public Label done;
 
     private String lang;
     private File selectedDirectory;
@@ -38,11 +40,23 @@ public class LangBuilderController implements Initializable {
 
         listView.getSelectionModel().selectedItemProperty().addListener(event -> {
             Tile tile = listView.getSelectionModel().getSelectedItem();
-            name.setText(tile.getName());
-            description.setText(tile.getDescription());
+            if (tile != null){
+                name.setText(tile.getName());
+                description.setText(tile.getDescription());
+                name.setDisable(false);
+                description.setDisable(false);
+            } else {
+                name.setDisable(true);
+                description.setDisable(true);
+                name.setText("");
+                description.setText("");
+            }
         });
 
         writeFileBtn.setDisable(true);
+        done.setDisable(true);
+        name.setDisable(true);
+        description.setDisable(true);
     }
 
     public void selectModFolder(ActionEvent actionEvent) throws IOException {
@@ -70,40 +84,13 @@ public class LangBuilderController implements Initializable {
         }
 
         listView.getItems().clear();
-        listView.getItems().addAll(getTiles(selectedDirectory));
-    }
-
-    private ArrayList<Tile> getTiles(File folder) throws IOException {
-        File[] dirs = {folder};
-        ArrayList<File> directories = new ArrayList<>(Arrays.asList(dirs));
-        directories = getFolders(folder, directories);
-
         ArrayList<Tile> tiles = new ArrayList<>();
-        for (File dir : directories) {
-            File[] tfs = dir.listFiles((current, name) -> new File(current, name).getName().endsWith(".tile"));
-            if (tfs != null && tfs.length > 0) {
-                for (File tf : tfs) {
-                    tiles.add(new Tile(tf, lang));
-                }
-            }
+        for (File file : FileHandler.getFiles(".tile", selectedDirectory, true)){
+            tiles.add(new Tile(file, lang));
         }
+        listView.getItems().addAll(tiles);
 
-        return tiles;
-    }
-
-    private ArrayList<File> getFolders(File folder, ArrayList<File> directories) {
-        File[] subDirectories = folder.listFiles((current, name) -> new File(current, name).isDirectory());
-        if (subDirectories == null || subDirectories.length <= 0) {
-            return directories;
-        }
-        for (File file : subDirectories) {
-            directories.add(file);
-            File[] subDirs = file.listFiles((current, name) -> new File(current, name).isDirectory());
-            if (subDirs != null && subDirs.length > 0) {
-                directories = getFolders(file, directories);
-            }
-        }
-        return directories;
+        done.setDisable(true);
     }
 
     public void writeLangFile(ActionEvent actionEvent) throws IOException {
@@ -116,6 +103,13 @@ public class LangBuilderController implements Initializable {
 
         File langFile = new File(selectedDirectory.getPath(), selectedDirectory.getName() + ".lang");
         FileHandler.writeFile(String.join("\n\n", langLines), langFile);
+
+        done.setDisable(false);
+        PauseTransition transition = new PauseTransition(Duration.seconds(1.25));
+        transition.setOnFinished(event -> {
+            done.setDisable(true);
+        });
+        transition.play();
     }
 
     public void editName() {

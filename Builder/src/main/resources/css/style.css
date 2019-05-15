@@ -1,57 +1,89 @@
 * {
-    -accent-color: #1eb87f;
+    -text-color-accent: ladder(-accent-color, white 0%, white 59%, black 60%, black 100%);
+    -text-color-background: ladder(-background-color, white 0%, white 59%, black 60%, black 100%);
 }
 
 .root {
-    -fx-background-color: #263238;
-    -fx-font-family: Roboto;
+    -background-color: white;
+    -fx-background-color: -background-color;
+    -accent-color: white;
 }
 
 .button {
-    -fx-background-color: white;
-    -fx-border-color: black;
+    -fx-background-color: -accent-color;
+    -fx-border-color: none;
     -fx-border-radius: 3px;
     -fx-border-width: 1px;
     -fx-background-insets: 0;
     -fx-margin: 0px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-text-fill: -text-color-accent;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 .button:hover {
-    /*-fx-background-color: #e7e7e7;*/
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 0);
+    -fx-opacity: 90%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 20, 0, 0, 0);
 }
 
 .bigButton {
-    -fx-background-color: -accent-color;
     -fx-font-size: 20px;
-    -fx-text-fill: white;
 }
 
 .filePicker {
     -fx-border-radius: 0px;
-    -fx-background-color: white;
-    -fx-border-color: black;
+    -fx-background-color: -accent-color;
+    -fx-border-color: none;
     -fx-background-insets: 0;
     -fx-effect: none;
+    -fx-text-fill: -text-color-accent;
+}
+
+.filePicker.button {
+    -fx-border-color: -text-color-accent;
+    -fx-border-width: 0px 0px 0px 1px;
 }
 
 .filePicker:hover {
     -fx-effect: none;
-    -fx-background-color: #f3f3f3;
 }
 
-.anchor-pane {
-    -fx-background-color: white;
+.list-view {
+    -fx-border-radius: 0px;
+    -fx-border-color: -accent-color;
+    -fx-background-insets: 0;
+    -fx-effect: none;
+    -fx-text-fill: -text-color-accent;
+}
+
+.text-field {
+    -fx-border-radius: 0px;
+    -fx-background-color: -accent-color;
+    -fx-border-color: none;
+    -fx-background-insets: 0;
+    -fx-effect: none;
+    -fx-text-fill: -text-color-accent;
+}
+
+.text-area {
+    -fx-border-radius: 0px;
+    -fx-border-color: -accent-color;
+    -fx-background-insets: 0;
+    -fx-effect: none;
+}
+
+.color-picker {
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0px;
+    -fx-background-color: -accent-color;
 }
 
 .title {
     -fx-font-size: 20px;
-    -fx-text-fill: white;
+    -fx-fill: -text-color-background;
     -fx-font-family: Roboto;
 }
 
 .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -text-color-background;
     -fx-font-family: Roboto;
 }
