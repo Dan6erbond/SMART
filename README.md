@@ -2,7 +2,7 @@
 
 A simple set of programs and scripts to enhance the experience of building Staxel Mods!
 
-## Mod Builder Builder
+## Mod Builder
 The Mod Builder is a GUI application which currently supports the importing of `.lang` as well as exporting in addition to editing the output `name` and `description` of the individual `.tile` files that are exported into the `.lang` file with the GUI tools.
 
 ### Usage
