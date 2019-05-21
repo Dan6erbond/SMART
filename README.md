@@ -12,4 +12,4 @@ This program is a simple console-based script written in Python that allows you 
 Download the latest release from [here](https://github.com/Dan6erbond/Staxel-Mod-Builder/releases) and launch the `.exe` file. Enter the folder-path and press enter. If you need to generate more files, the program will stay open until you press Ctrl + C so the process can be repeated. If any errors are thrown you should screenshot the output and submit it under the [Issues](https://github.com/Dan6erbond/Staxel-Mod-Builder/issues).
 
 ## Roadmap
-  -[] A fully-fledged Mod Builder that allows you to create a Tile from scratch **or** load one and save (as).
+  - [ ] A fully-fledged Mod Builder that allows you to create a Tile from scratch **or** load one and save (as).
