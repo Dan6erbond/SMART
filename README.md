@@ -1,4 +1,4 @@
-# Staxel Mod Builder
+# Staxel Mod Suite
 
 A simple set of programs and scripts to enhance the experience of building Staxel Mods!
 
