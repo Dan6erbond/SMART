@@ -3,6 +3,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
@@ -20,9 +22,11 @@ public class LangBuilderController implements Initializable {
     public TextArea description;
     public Button writeFileBtn;
     public Label done;
+    public Label message;
+    public TextField code;
 
     private String lang;
-    private File selectedDirectory;
+    private File langFile;
 
     public void initialize(URL location, ResourceBundle resources) {
         listView.setCellFactory(param -> new ListCell<Tile>() {
@@ -42,21 +46,63 @@ public class LangBuilderController implements Initializable {
             Tile tile = listView.getSelectionModel().getSelectedItem();
             if (tile != null){
                 name.setText(tile.getName());
-                description.setText(tile.getDescription());
                 name.setDisable(false);
+                description.setText(tile.getDescription());
                 description.setDisable(false);
+                code.setText(tile.getCode());
+                code.setDisable(false);
             } else {
                 name.setDisable(true);
                 description.setDisable(true);
+                code.setDisable(true);
                 name.setText("");
                 description.setText("");
+                code.setText("");
             }
         });
 
         writeFileBtn.setDisable(true);
         done.setDisable(true);
         name.setDisable(true);
+        code.setDisable(true);
         description.setDisable(true);
+        message.setText("");
+
+        code.textProperty().addListener(event -> {
+            Tile tile = listView.getSelectionModel().getSelectedItem();
+            if (tile == null) {
+                return;
+            }
+            tile.setCode(code.getText());
+            listView.refresh();
+            try {
+                tile.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        name.textProperty().addListener(event -> {
+            Tile tile = listView.getSelectionModel().getSelectedItem();
+            if (tile == null) {
+                return;
+            }
+            tile.setName(name.getText());
+        });
+
+        description.addEventFilter(KeyEvent.ANY, event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                event.consume();
+            }
+        });
+
+        description.textProperty().addListener(event -> {
+            Tile tile = listView.getSelectionModel().getSelectedItem();
+            if (tile == null) {
+                return;
+            }
+            tile.setDescription(description.getText());
+        });
     }
 
     public void selectModFolder(ActionEvent actionEvent) throws IOException {
@@ -65,7 +111,7 @@ public class LangBuilderController implements Initializable {
         String currentDir = folderPath.getText().isEmpty() ? System.getProperty("user.dir") : folderPath.getText();
         File defaultDirectory = new File(currentDir);
         chooser.setInitialDirectory(defaultDirectory);
-        selectedDirectory = chooser.showDialog(((Node) actionEvent.getSource()).getScene().getWindow());
+        File selectedDirectory = chooser.showDialog(((Node) actionEvent.getSource()).getScene().getWindow());
 
         if (selectedDirectory == null) {
             return;
@@ -74,13 +120,17 @@ public class LangBuilderController implements Initializable {
         writeFileBtn.setDisable(false);
         folderPath.setText(selectedDirectory.toString());
 
-        File langFile = new File(selectedDirectory.getPath(), selectedDirectory.getName() + ".lang");
+        langFile = new File(selectedDirectory.getPath(), selectedDirectory.getName() + ".lang");
+        ArrayList<File> langFiles = FileHandler.getFiles(".lang", selectedDirectory, false);
+        if (langFiles.size() > 0){
+            langFile = langFiles.get(0);
+        }
+
         if (langFile.exists()) {
-            try {
-                lang = FileHandler.readFile(langFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lang = FileHandler.readFile(langFile);
+            message.setText("Lang file located!");
+        } else {
+            message.setText("No Lang file found. A new one will be created.");
         }
 
         listView.getItems().clear();
@@ -88,6 +138,12 @@ public class LangBuilderController implements Initializable {
         for (File file : FileHandler.getFiles(".tile", selectedDirectory, true)){
             tiles.add(new Tile(file, lang));
         }
+
+        if (tiles.size() == 0){
+            message.setText("No Tile files found!");
+            writeFileBtn.setDisable(true);
+        }
+
         listView.getItems().addAll(tiles);
 
         done.setDisable(true);
@@ -101,7 +157,6 @@ public class LangBuilderController implements Initializable {
             langLines.add(tile.getLang());
         }
 
-        File langFile = new File(selectedDirectory.getPath(), selectedDirectory.getName() + ".lang");
         FileHandler.writeFile(String.join("\n\n", langLines), langFile);
 
         done.setDisable(false);
@@ -110,21 +165,5 @@ public class LangBuilderController implements Initializable {
             done.setDisable(true);
         });
         transition.play();
-    }
-
-    public void editName() {
-        Tile tile = listView.getSelectionModel().getSelectedItem();
-        if (tile == null) {
-            return;
-        }
-        tile.setName(name.getText());
-    }
-
-    public void editDescription() {
-        Tile tile = listView.getSelectionModel().getSelectedItem();
-        if (tile == null) {
-            return;
-        }
-        tile.setDescription(description.getText());
     }
 }

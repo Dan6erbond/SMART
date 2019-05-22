@@ -7,22 +7,32 @@ import java.util.regex.Pattern;
 
 public class Tile {
 
+    private File file;
     private String name;
     private String description;
     private String code;
 
     public Tile(File file, String lang) throws IOException {
+        this.file = file;
+
         String json = FileHandler.readFile(file);
-        JSONObject object = new JSONObject(json);
+        JSONObject object;
+        try{
+            object = new JSONObject(json);
+        } catch (Exception e){
+            System.out.println(file.getPath());
+            System.out.println(e);
+            return;
+        }
         code = object.getString("code");
 
         String fileName = file.getName().replace(".tile", "");
 
         if (lang != null && !lang.isEmpty()) {
-            Pattern namePattern = Pattern.compile(code + ".name=\"(\\w+)\"");
+            Pattern namePattern = Pattern.compile(code + ".name=(\\w+)");
             Matcher nameMatcher = namePattern.matcher(lang);
 
-            Pattern descPattern = Pattern.compile(code + ".description=\"(\\w+)\"");
+            Pattern descPattern = Pattern.compile(code + ".description=([a-zA-Z\" \"]*)");
             Matcher descMatcher = descPattern.matcher(lang);
 
             if (nameMatcher.find()) {
@@ -47,8 +57,8 @@ public class Tile {
     }
 
     public String getLang() {
-        String langName = code + ".name=\"" + name + "\"";
-        String langDescription = description + ".description=\"" + description + "\"";
+        String langName = code + ".name=" + name;
+        String langDescription = code + ".description=" + description;
         return langName + "\n" + langDescription;
     }
 
@@ -66,6 +76,18 @@ public class Tile {
 
     public String getCode() {
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void save() throws IOException {
+        String json = FileHandler.readFile(file);
+        JSONObject object = new JSONObject(json);
+        object.put("code", code);
+
+        FileHandler.writeFile(object.toString(4), file);
     }
 
 }

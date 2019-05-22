@@ -90,7 +90,7 @@ public class SceneManager {
 
     public void changeScene(String fxml, String redirect) throws IOException {
         if (stage == null) {
-            stage = new Stage(StageStyle.UTILITY);
+            stage = new Stage();
             stage.setResizable(false);
             stage.show();
         }
@@ -123,7 +123,7 @@ public class SceneManager {
         setColors();
     }
 
-    public void setBackgroundColor(Color color) {
+    public void setBackgroundColor(Color color) throws IOException {
         backgroundColor = color;
         setColors();
     }
@@ -132,7 +132,7 @@ public class SceneManager {
         return backgroundColor;
     }
 
-    public void setAccentColor(Color color) {
+    public void setAccentColor(Color color) throws IOException {
         accentColor = color;
         setColors();
     }
@@ -161,7 +161,13 @@ public class SceneManager {
         }
     }*/
 
-    private void setColors() {
+    private void setColors() throws IOException {
+        File file = new File("config.json");
+        JSONObject object = new JSONObject();
+        object.put("backgroundColor", getHEX(backgroundColor));
+        object.put("accentColor", getHEX(accentColor));
+        FileHandler.writeFile(object.toString(), file);
+
         if (root != null) {
             root.setStyle("-accent-color: " + getHEX(accentColor) + ";" + "-background-color: " + getHEX(backgroundColor) + ";" + "-fx-background-color: -background-color;" /* + "-text-color-background: " + textBackgroundRGB + ";"*/);
         }

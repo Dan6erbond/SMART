@@ -38,11 +38,11 @@ public class HomeController implements Initializable {
         SceneManager.getInstance().changeScene(fxml, "/fxml/Home.fxml");
     }
 
-    public void setBGColor(ActionEvent actionEvent) {
+    public void setBGColor(ActionEvent actionEvent) throws IOException {
         SceneManager.getInstance().setBackgroundColor(bgPicker.getValue());
     }
 
-    public void setAccentColor(ActionEvent actionEvent) {
+    public void setAccentColor(ActionEvent actionEvent) throws IOException {
         SceneManager.getInstance().setAccentColor(accentPicker.getValue());
     }
 }

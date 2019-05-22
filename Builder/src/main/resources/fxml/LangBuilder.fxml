@@ -14,15 +14,18 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <TextField fx:id="folderPath" editable="false" layoutX="102.0" layoutY="54.0" prefHeight="27.0" prefWidth="367.0" styleClass="filePicker" stylesheets="@../css/style.css" />
-      <Button layoutX="468.0" layoutY="54.0" mnemonicParsing="false" onAction="#selectModFolder" prefHeight="27.0" prefWidth="108.0" styleClass="filePicker" text="Select Directory" />
-      <Label layoutX="25.0" layoutY="59.0" text="Mod Folder" />
-      <ListView fx:id="listView" layoutX="23.0" layoutY="132.0" prefHeight="287.0" prefWidth="323.0" AnchorPane.bottomAnchor="23.0" />
-      <Label layoutX="352.0" layoutY="90.0" text="Name" />
-      <Label layoutX="354.0" layoutY="148.0" text="Description" />
-      <TextField fx:id="name" layoutX="352.0" layoutY="116.0" onKeyTyped="#editName" prefHeight="25.0" prefWidth="222.0" />
-      <TextArea fx:id="description" layoutX="352.0" layoutY="172.0" onKeyTyped="#editDescription" prefHeight="165.0" prefWidth="222.0" wrapText="true" />
-      <Button fx:id="writeFileBtn" layoutX="404.0" layoutY="350.0" mnemonicParsing="false" onAction="#writeLangFile" prefHeight="27.0" prefWidth="170.0" text="Write Lang File" />
-      <Label fx:id="done" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="347.0" layoutY="355.0" prefHeight="17.0" prefWidth="53.0" text="Done!" />
+      <TextField fx:id="folderPath" editable="false" layoutX="102.0" layoutY="50.0" prefHeight="27.0" prefWidth="367.0" promptText="Pick a Directory" styleClass="filePicker" stylesheets="@../css/style.css" />
+      <Button layoutX="468.0" layoutY="50.0" mnemonicParsing="false" onAction="#selectModFolder" prefHeight="27.0" prefWidth="108.0" styleClass="filePicker" text="Select Directory" />
+      <Label layoutX="25.0" layoutY="55.0" text="Mod Folder" />
+      <ListView fx:id="listView" layoutX="23.0" layoutY="96.66666666666666" prefHeight="255.0" prefWidth="323.0" AnchorPane.bottomAnchor="48.0" />
+      <Label layoutX="352.0" layoutY="165.0" text="Name" />
+      <Label layoutX="354.0" layoutY="226.0" text="Description" />
+      <TextField fx:id="name" layoutX="352.0" layoutY="191.0" prefHeight="25.0" prefWidth="222.0" promptText="Name" />
+      <TextArea fx:id="description" layoutX="352.0" layoutY="254.0" prefHeight="98.0" prefWidth="222.0" promptText="Description" wrapText="true" />
+      <Button fx:id="writeFileBtn" layoutX="404.0" layoutY="363.0" mnemonicParsing="false" onAction="#writeLangFile" prefHeight="27.0" prefWidth="170.0" text="Write Lang File" />
+      <Label fx:id="done" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="347.0" layoutY="368.0" prefHeight="17.0" prefWidth="53.0" text="Done!" />
+      <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="368.0" prefHeight="17.0" prefWidth="323.0" text="Message" />
+      <Label layoutX="352.0" layoutY="97.0" text="Code" />
+      <TextField fx:id="code" layoutX="352.0" layoutY="123.0" prefHeight="25.0" prefWidth="222.0" promptText="Code" />
    </children>
 </AnchorPane>

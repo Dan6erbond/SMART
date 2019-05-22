@@ -3,7 +3,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Builder extends Application {
 
@@ -15,11 +17,10 @@ public class Builder extends Application {
     public void start(Stage primaryStage) throws IOException {
         Font.loadFont(Builder.class.getResource("/fonts/Roboto-Regular.ttf").toExternalForm(), 12);
 
-        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setResizable(false);
         SceneManager.getInstance().setStage(primaryStage);
 
-        SceneManager.getInstance().changeScene("/fxml/LangBuilder.fxml");
+        SceneManager.getInstance().changeScene("/fxml/Home.fxml");
         primaryStage.show();
     }
 }

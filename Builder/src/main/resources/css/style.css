@@ -62,19 +62,35 @@
     -fx-background-insets: 0;
     -fx-effect: none;
     -fx-text-fill: -text-color-accent;
+    -fx-prompt-text-fill: -text-color-accent;
 }
 
 .text-area {
-    -fx-border-radius: 0px;
+    -fx-background-color: -accent-color;
+    -fx-border-radius: 3px;
     -fx-border-color: -accent-color;
     -fx-background-insets: 0;
     -fx-effect: none;
+    -fx-text-fill: -text-color-accent;
+    -fx-prompt-text-fill: -text-color-accent;
+}
+
+.text-area .content {
+    -fx-background-color: -accent-color;
+    -fx-border-color: -accent-color;
+    -fx-background-insets: 0;
+    -fx-effect: none;
+    -fx-text-box-border: transparent;
 }
 
 .color-picker {
     -fx-background-radius: 0px;
     -fx-background-insets: 0px;
     -fx-background-color: -accent-color;
+}
+
+.color-picker .arrow-button .arrow {
+    -fx-background-color: -text-color-accent;
 }
 
 .title {
@@ -86,4 +102,34 @@
 .label {
     -fx-text-fill: -text-color-background;
     -fx-font-family: Roboto;
+}
+
+.category {
+    -fx-border-color: transparent transparent -text-color-accent transparent;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+}
+
+.check-box {
+    -fx-text-fill: -text-color-background;
+}
+
+.check-box .box {
+    -fx-background-color: -accent-color;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -text-color-accent;
+}
+
+.combo-box {
+    -fx-background-color: -accent-color;
+}
+
+.combo-box .cell {
+    -fx-text-fill: -text-color-accent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: -text-color-accent;
 }
