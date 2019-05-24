@@ -29,10 +29,10 @@ public class Tile {
         String fileName = file.getName().replace(".tile", "");
 
         if (lang != null && !lang.isEmpty()) {
-            Pattern namePattern = Pattern.compile(code + ".name=(\\w+)");
+            Pattern namePattern = Pattern.compile(code + ".name=(.+)");
             Matcher nameMatcher = namePattern.matcher(lang);
 
-            Pattern descPattern = Pattern.compile(code + ".description=([a-zA-Z\" \"]*)");
+            Pattern descPattern = Pattern.compile(code + ".description=(.+)");
             Matcher descMatcher = descPattern.matcher(lang);
 
             if (nameMatcher.find()) {
