@@ -23,9 +23,8 @@
       <Label layoutX="27.0" layoutY="184.0" text="Kind" />
       <Label layoutX="25.0" layoutY="226.0" prefHeight="19.0" prefWidth="483.0" styleClass="category" text="Catalogue/Inventory Options" />
       <Label layoutX="27.0" layoutY="270.0" prefHeight="17.0" prefWidth="63.0" text="Categories" />
-      <TextField fx:id="categories" layoutX="154.0" layoutY="266.0" prefHeight="25.0" prefWidth="353.0" promptText="Categories" />
       <Label layoutX="26.0" layoutY="308.0" prefHeight="17.0" prefWidth="106.0" text="Description Image" />
-      <TextField fx:id="categories1" layoutX="153.0" layoutY="304.0" prefHeight="25.0" prefWidth="353.0" promptText="Description Image" />
+      <TextField fx:id="descriptionImage" layoutX="153.0" layoutY="304.0" prefHeight="25.0" prefWidth="353.0" promptText="Description Image" />
       <Label layoutX="26.0" layoutY="344.0" prefHeight="17.0" prefWidth="106.0" text="Searchable" />
       <CheckBox fx:id="searchable" layoutX="154.0" layoutY="344.0" mnemonicParsing="false" text="Searchable" />
       <Spinner fx:id="stackSizeLimit" editable="true" layoutX="153.0" layoutY="380.0" />
@@ -39,11 +38,11 @@
       <CheckBox fx:id="growFlowers" layoutX="153.0" layoutY="463.0" mnemonicParsing="false" text="Can Grow Flowers" />
       <Label layoutX="26.0" layoutY="640.0" prefHeight="17.0" prefWidth="106.0" text="Compound" underline="true" />
       <Label layoutX="26.0" layoutY="673.0" prefHeight="17.0" prefWidth="106.0" text="Size" />
-      <Spinner fx:id="sizeX" editable="true" layoutX="183.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
+      <Spinner fx:id="sizeX" layoutX="183.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
       <Label layoutX="155.0" layoutY="673.0" prefHeight="17.0" prefWidth="28.0" text="X" />
-      <Spinner fx:id="sizeY" editable="true" layoutX="299.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
+      <Spinner fx:id="sizeY" layoutX="299.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
       <Label layoutX="271.0" layoutY="673.0" prefHeight="17.0" prefWidth="28.0" text="Y" />
-      <Spinner fx:id="sizeZ" editable="true" layoutX="412.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
+      <Spinner fx:id="sizeZ" layoutX="412.0" layoutY="669.0" prefHeight="25.0" prefWidth="63.0" />
       <Label layoutX="384.0" layoutY="673.0" prefHeight="17.0" prefWidth="28.0" text="Z" />
       <Label layoutX="27.0" layoutY="710.0" prefHeight="17.0" prefWidth="106.0" text="Specification" />
       <TextField fx:id="categories2" layoutX="154.0" layoutY="706.0" prefHeight="25.0" prefWidth="353.0" promptText="Specification" />
@@ -56,6 +55,17 @@
       <Label layoutX="26.0" layoutY="605.0" prefHeight="17.0" prefWidth="106.0" text="Merchant Kind" />
       <TextField fx:id="merchantKind" layoutX="153.0" layoutY="601.0" prefHeight="25.0" prefWidth="353.0" promptText="Merchant Kind" />
       <Label layoutX="539.0" layoutY="140.0" prefHeight="19.0" prefWidth="455.0" styleClass="category" text="Object Options" />
-      <Label layoutX="539.0" layoutY="175.0" prefHeight="17.0" prefWidth="190.0" text="Work in Progress!" />
+      <ComboBox fx:id="categories" layoutX="153.0" layoutY="266.0" prefWidth="150.0" promptText="Categories" />
+      <Button layoutX="310.0" layoutY="266.0" mnemonicParsing="false" onAction="#addCategory" text="+" />
+      <Label layoutX="539.0" layoutY="176.0" prefHeight="17.0" prefWidth="63.0" text="Variants" />
+      <ComboBox fx:id="variants" layoutX="665.0" layoutY="172.0" prefHeight="25.0" prefWidth="297.0" promptText="Variants" />
+      <Button layoutX="969.0" layoutY="172.0" mnemonicParsing="false" onAction="#addVariant" text="+" />
+      <Label layoutX="539.0" layoutY="218.0" prefHeight="17.0" prefWidth="106.0" text="Voxels" />
+      <TextField fx:id="objectVoxels" layoutX="666.0" layoutY="214.0" prefHeight="25.0" prefWidth="327.0" promptText="Voxels" />
+      <Label layoutX="539.0" layoutY="257.0" prefHeight="19.0" prefWidth="455.0" styleClass="category" text="Material Options" />
+      <Label fx:id="Voxels1" layoutX="540.0" layoutY="296.0" prefHeight="17.0" prefWidth="106.0" text="Layout" />
+      <TextField fx:id="layout" layoutX="667.0" layoutY="292.0" prefHeight="25.0" prefWidth="327.0" promptText="Layout" />
+      <Label layoutX="540.0" layoutY="336.0" prefHeight="17.0" prefWidth="106.0" text="Voxels" />
+      <TextField fx:id="materialVoxels" layoutX="667.0" layoutY="332.0" prefHeight="25.0" prefWidth="327.0" promptText="Voxels" />
    </children>
 </AnchorPane>

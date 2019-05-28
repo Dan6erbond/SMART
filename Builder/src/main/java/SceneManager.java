@@ -21,9 +21,13 @@ public class SceneManager {
     private Parent root;
 
     //private Color backgroundColor = Color.rgb(86, 221, 84);
-    private Color backgroundColor = Color.rgb(38, 50, 56);
     //private Color accentColor = Color.rgb(218, 30, 111);
-    private Color accentColor = Color.rgb(30, 184, 127);
+
+    //private Color backgroundColor = Color.rgb(38, 50, 56);
+    //private Color accentColor = Color.rgb(30, 184, 127);
+
+    private Color backgroundColor = Color.valueOf("#154d6b");
+    private Color accentColor = Color.valueOf("#bec9df");
 
     private SceneManager() throws IOException {
         File file = new File("config.json");
