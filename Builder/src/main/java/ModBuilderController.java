@@ -3,17 +3,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.converter.IntegerStringConverter;
 
-import javax.xml.stream.EventFilter;
 import java.io.File;
 import java.net.URL;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 

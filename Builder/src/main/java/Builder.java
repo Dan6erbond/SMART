@@ -1,11 +1,8 @@
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Builder extends Application {
 
