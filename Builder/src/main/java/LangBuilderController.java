@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class LangBuilderController implements Initializable {
 
     public TextField folderPath;
-    public ListView<Tile> listView;
+    public ListView<StaxelObject> listView;
     public TextField name;
     public TextArea description;
     public Button writeFileBtn;
@@ -29,27 +29,27 @@ public class LangBuilderController implements Initializable {
     private File langFile;
 
     public void initialize(URL location, ResourceBundle resources) {
-        listView.setCellFactory(param -> new ListCell<Tile>() {
+        listView.setCellFactory(param -> new ListCell<StaxelObject>() {
             @Override
-            protected void updateItem(Tile item, boolean empty) {
-                super.updateItem(item, empty);
+            protected void updateItem(StaxelObject object, boolean empty) {
+                super.updateItem(object, empty);
 
-                if (empty || item == null) {
+                if (empty || object == null) {
                     setText(null);
                 } else {
-                    setText(item.getCode());
+                    setText(object.getCode());
                 }
             }
         });
 
         listView.getSelectionModel().selectedItemProperty().addListener(event -> {
-            Tile tile = listView.getSelectionModel().getSelectedItem();
-            if (tile != null){
-                name.setText(tile.getName());
+            StaxelObject object = listView.getSelectionModel().getSelectedItem();
+            if (object != null){
+                name.setText(object.getName());
                 name.setDisable(false);
-                description.setText(tile.getDescription());
+                description.setText(object.getDescription());
                 description.setDisable(false);
-                code.setText(tile.getCode());
+                code.setText(object.getCode());
                 code.setDisable(false);
             } else {
                 name.setDisable(true);
@@ -69,25 +69,25 @@ public class LangBuilderController implements Initializable {
         message.setText("");
 
         code.textProperty().addListener(event -> {
-            Tile tile = listView.getSelectionModel().getSelectedItem();
-            if (tile == null) {
+            StaxelObject object = listView.getSelectionModel().getSelectedItem();
+            if (object == null) {
                 return;
             }
-            tile.setCode(code.getText());
+            object.setCode(code.getText());
             listView.refresh();
             try {
-                tile.save();
+                object.save();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
 
         name.textProperty().addListener(event -> {
-            Tile tile = listView.getSelectionModel().getSelectedItem();
-            if (tile == null) {
+            StaxelObject object = listView.getSelectionModel().getSelectedItem();
+            if (object == null) {
                 return;
             }
-            tile.setName(name.getText());
+            object.setName(name.getText());
         });
 
         description.addEventFilter(KeyEvent.ANY, event -> {
@@ -97,11 +97,11 @@ public class LangBuilderController implements Initializable {
         });
 
         description.textProperty().addListener(event -> {
-            Tile tile = listView.getSelectionModel().getSelectedItem();
-            if (tile == null) {
+            StaxelObject object = listView.getSelectionModel().getSelectedItem();
+            if (object == null) {
                 return;
             }
-            tile.setDescription(description.getText());
+            object.setDescription(description.getText());
         });
     }
 
@@ -134,17 +134,24 @@ public class LangBuilderController implements Initializable {
         }
 
         listView.getItems().clear();
+
         ArrayList<Tile> tiles = new ArrayList<>();
         for (File file : FileHandler.getFiles(".tile", selectedDirectory, true)){
             tiles.add(new Tile(file, lang));
         }
 
-        if (tiles.size() == 0){
+        ArrayList<Item> items = new ArrayList<>();
+        for (File file : FileHandler.getFiles(".item", selectedDirectory, true)){
+            items.add(new Item(file, lang));
+        }
+
+        if (tiles.size() == 0 && items.size() == 0){
             message.setText("No Tile files found!");
             writeFileBtn.setDisable(true);
         }
 
         listView.getItems().addAll(tiles);
+        listView.getItems().addAll(items);
 
         done.setDisable(true);
     }
@@ -153,8 +160,8 @@ public class LangBuilderController implements Initializable {
         ArrayList<String> langLines = new ArrayList<>();
         langLines.add("language.code=en-GB\nlanguage=English");
 
-        for (Tile tile : listView.getItems()) {
-            langLines.add(tile.getLang());
+        for (StaxelObject object : listView.getItems()) {
+            langLines.add(object.getLang());
         }
 
         FileHandler.writeFile(String.join("\n\n", langLines), langFile);

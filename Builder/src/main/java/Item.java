@@ -5,28 +5,28 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Tile implements StaxelObject {
+public class Item implements StaxelObject {
 
     private File file;
     private String name;
     private String description;
     private String code;
 
-    public Tile(File file, String lang) throws IOException {
+    public Item(File file, String lang) throws IOException {
         this.file = file;
 
         String json = FileHandler.readFile(file);
         JSONObject object;
-        try{
+        try {
             object = new JSONObject(json);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(file.getPath());
             System.out.println(e);
             return;
         }
         code = object.getString("code");
 
-        String fileName = file.getName().replace(".tile", "");
+        String fileName = file.getName().replace(".item", "");
 
         if (lang != null && !lang.isEmpty()) {
             Pattern namePattern = Pattern.compile(code + ".name=(.+)");
